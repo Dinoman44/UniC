@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Shop | {{ listing[2] }}
+{% endblock %}
+
+{% block body %}
+    <h2></h2>
+    <div class="wrappersignin" style="right: 0px; padding-right: 15px; width: fit-content;">
+        <div class="button" onclick="location.href='/'">
+            <span class="button__mask"></span>
+            <span class="button__text">Back home</span>
+            <span class="button__text button__text--bis">Back home</span>
+        </div>
+    </div>
+
+    <div class="wrappersignin" style="left: 0px; padding-left: 15px; width: fit-content;">
+        <div class="button" onclick="location.href='/uni_shop'">
+            <span class="button__mask"></span>
+            <span class="button__text">Back to shop</span>
+            <span class="button__text button__text--bis">Back to shop</span>
+        </div>
+    </div>
+
+    <div class="module-border-wrap" style="margin: auto; width: 70%; margin-top: 100px;">
+        <div class="listing-card">
+            <div class="text">
+                <h2>{{ listing[2] }}</h3>
+                <p>{{ listing[3] }}</p>
+                <p>Category: <b>{{ listing[4] }}</b></p>
+                {% if listing[5] == "new" %}
+                    <p>First hand/new/barely-used</p>
+                {% else %}
+                    <p>Second-hand</p>
+                {% endif %}
+                <p><i>Put up for sale on <b>{{ listing[7] }}</b></i></p>
+                <div class="module-border-wrap" style="width: 50%; margin: auto;">
+                    <div class="listing-card">
+                        <div class="text">
+                            <h3>Seller details</h3>
+                            <p>Username: {{ seller[0] }}</p>
+                            <p>Location: {{ seller[4] }}</p>
+                            <p>Distance from you: {{ display_dist }}</p>
+                            <p>Contact number(in case the button below doesn't work): {{ seller[1] }}</p>
+                            {% if dist > 250 %} 
+                                <div class="dist_check" style="color: #721c24; background-color: #f8d7da;">The seller may be too far from you</div>
+                            {% elif dist > 100 %} 
+                                <div class="dist_check" style="color: #856404; background-color: #fff3cd;">The seller is quite some distance away</div>
+                            {% else %}
+                                <div class="dist_check" style="color: #155724; background-color: #d4edda;">The seller is likely in or near your city</div>
+                            {% endif %}
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <form hidden method="post" action="chat/redirect">
+                    <input hidden name="csrf_token" value="{{ csrf_token() }}">
+                    <input hidden name="phone_num" value="{{ seller[1] }}">
+                </form>
+                <div class="mentorsign" style="margin: auto;" id="submit">
+                    <div class="button">
+                        <span class="button__mask"></span>
+                        <span class="button__text">Contact seller</span>
+                        <span class="button__text button__text--bis">Contact seller</span>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelector("#submit").addEventListener("click", () => {
+                if (confirm("You will be redirected to a whatsapp chat with the seller, where you can negotiate the price and find out further details")) {
+                    document.querySelector("form").submit();
+                }
+            })
+        })
+    </script>
+{% endblock %}

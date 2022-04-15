@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    About 
+{% endblock %}
+
+{% block body %}
+    <div class='banner'>
+        <img src='static/img/banner2.png'>
+    </div>
+    <h1 style="font-weight: bold; color: #a4a4a4">Creators of <span style="color: #529bf5;">Uni</span><span style="color:#82b1ea;">C</span></h1>
+    <div style="color: #e7e7e7; font-size: large;">
+        {% for name in names %}
+            <b><p class="text" style="color: #e7e7e7; font-size: large;">{{ name }}</p></b>
+        {% endfor %}
+    </div>
+    
+    <div class="wrappersignin" onclick="location.href='/'" style="width: 200px;">
+        <div class="button">
+            <span class="button__mask"></span>
+            <span class="button__text">Back to Home</span>
+            <span class="button__text button__text--bis">Back to Home</span>
+        </div>
+    </div>
+{% endblock %}

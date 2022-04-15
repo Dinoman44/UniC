@@ -1,0 +1,72 @@
+{% extends "layout.html" %} 
+
+{% block title %} 
+    Home
+{% endblock %}
+
+{% block body %}
+    <div class='banner'>
+        <img src='static/img/banner2.png' alt="homepageimg">
+    </div>
+
+    {% if not logged_in %} 
+
+    <div class="wrappersignin">
+        <div class="button" onClick="location.href='/login'" style="right: 150px;">
+            <span class="button__mask"></span>
+            <span class="button__text">Sign In</span>
+            <span class="button__text button__text--bis">Sign In</span>
+        </div>
+    </div>
+
+    <div class="wrappersignup">
+        <div class="button" onClick="location.href='/login'">
+            <span class="button__mask"></span>
+            <span class="button__text">Sign Up</span>
+            <span class="button__text button__text--bis">Sign Up</span>
+        </div>
+    </div>
+
+    {% else %}
+
+    <div class="wrappersignin" style="right: 165px; padding-left: 15px;">
+        <div class="button" onclick="location.href='/uni_shop'">
+            <span class="button__mask"></span>
+            <span class="button__text">Shop</span>
+            <span class="button__text button__text--bis">Shop</span>
+        </div>
+    </div>
+
+    <div class="wrappersignin" style="right: 330px; padding-left: 15px; width: fit-content;">
+        <div class="button" onclick="location.href='/mentor/search'">
+            <span class="button__mask"></span>
+            <span class="button__text">Mentorships</span>
+            <span class="button__text button__text--bis">Mentorships</span>
+        </div>
+    </div>
+
+    <div class="wrappersignin">
+        <div class="button" onclick="location.href='/account'">
+            <span class="button__mask"></span>
+            <span class="button__text">Account</span>
+            <span class="button__text button__text--bis">Account</span>
+        </div>
+    </div>
+
+    {% endif %}
+
+    <br><br>
+    <div class='text'>
+        <p>Are you studying abroad and feeling lonely? <b>Meet up</b> with some fellow students!</p>
+        <p>Are you living or studying abroad and would like to help? Help a fellow student <b>feel at home!</b></p>
+        <p>We, at <span style="color: #529bf5;">Uni</span><span style="color:#82b1ea;">C</span> help students studying abroad <b>connect</b> with each other and <b>feel at home!</b></p>
+    </div>
+
+    <div class="wrapperabout" style="position: relative; margin: auto; right: auto;">
+        <div class="button" onclick="location.href='/about'">
+            <span class="button__mask"></span>
+            <span class="button__text">About Us</span>
+            <span class="button__text button__text--bis">About Us</span>
+        </div>
+    </div>
+{% endblock %}

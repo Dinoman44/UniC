@@ -1,0 +1,118 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sign up as a mentor
+{% endblock %}
+
+{% block body %}
+    {% if registered %}
+        <script>
+            alert("Success! You are now a mentor")
+            window.location = "/";
+        </script>
+    {% else %} 
+        <h1 class="text" style="padding-top: 10px;">Sign up as a Mentor</h1>
+
+        <form action="/mentor/signup" method="post">
+            <label for="descr" class="text">Write a few words about yourself(max 300 characters)</label><br><br>
+            <div class="input-container">
+                <textarea id="descr" name="descr" required style="height: 100px;">Write here</textarea>
+            </div>
+            <br><br><br>
+
+            <input hidden name="csrf_token" value="{{ csrf_token() }}">
+        
+            <p class="text">What field do you want to mentor in?</p><br>
+            <div class="center">
+                <div class='radio-group'>
+                    <label class='radio-label'>
+                        <input name='expertin' type='radio' id='expertinid' value="Computer Science" checked='checked'>
+                        <span class='inner-label'>Computer Science</span>
+                    </label>
+                    <label class='radio-label'>
+                        <input name='expertin' type='radio' id='expertinid' value="Medecine">
+                        <span class='inner-label'>Medecine</span>
+                    </label>
+                    <label class='radio-label'>
+                        <input name='expertin' type='radio' id='expertinid' value="Business">
+                        <span class='inner-label'>Business</span>
+                    </label>
+                    <label class='radio-label'>
+                        <input name='expertin' type='radio' id='expertinid' value="Engineering">
+                        <span class='inner-label'>Engineering</span>
+                    </label>
+                </div>
+            </div>
+
+            <br><br><br>
+
+            <div class="center">
+                <div class='radio-group'>
+                    <label class='radio-label'>
+                        <input name='expertin' type='radio' id='expertinid' value="Physics">
+                        <span class='inner-label'>Physics</span>
+                    </label>
+                    <label class='radio-label'>
+                        <input name='expertin' type='radio' id='expertinid' value="Chemistry">
+                        <span class='inner-label'>Chemistry</span>
+                    </label>
+                    <label class='radio-label'>
+                        <input name='expertin' type='radio' id='expertinid' value="Biology">
+                        <span class='inner-label'>Biology</span>
+                    </label>
+                    <label class='radio-label'>
+                        <input name='expertin' type='radio' id='expertinid' value="Economics">
+                        <span class='inner-label'>Economics</span>
+                    </label>
+                </div>
+            </div>
+
+            <br><br><br>
+
+            <div class="center">
+                <div class='radio-group'>
+                    <label class='radio-label'>
+                        <input name='expertin' type='radio' id='expertinid' value="General academic advice">
+                        <span class='inner-label'>General academic advice</span>
+                    </label>
+                    <label class='radio-label'>
+                        <input name='expertin' type='radio' id='expertinid' value="Career-related advice">
+                        <span class='inner-label'>Career-related advice</span>
+                    </label>
+                    <label class='radio-label'>
+                        <input name='expertin' type='radio' id='expertinid' value="General advice">
+                        <span class='inner-label'>General advice</span>
+                    </label>
+                </div>
+            </div>
+            <br><br>
+
+            <div class="submit">
+                <div class="button" value="submit" id="submit">
+                    <span class="button__mask"></span>
+                    <span class="button__text">Submit!</span>
+                    <span class="button__text button__text--bis">Submit!</span>
+                </div>
+                <br>
+            </div>
+        </form>
+
+        <div class="backtohome">
+            <div class="button" onclick="location.href='/'">
+            <span class="button__mask"></span>
+            <span class="button__text">Back To Home</span>
+            <span class="button__text button__text--bis">Back To Home</span>
+            </div>
+            <br>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                document.querySelector("#submit").addEventListener("click", () => {
+                    document.querySelector("form").submit();
+                })
+            })
+        </script>
+        <br>
+    {% endif %}
+{% endblock %}

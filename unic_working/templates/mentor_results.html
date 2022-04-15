@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Mentors
+{% endblock %}
+
+{% block body %}
+    <div class="wrappersignup" style="width: fit-content;">
+        <div class="button" onclick="location.href='/'">
+            <span class="button__mask"></span>
+            <span class="button__text">Back To Home</span>
+            <span class="button__text button__text--bis">Back To Home</span>
+        </div>
+    </div>
+
+    {% if mentors %}
+        <h2 class="text">Here are some people mentoring in your chosen field <b>({{ area }})</b></h2>
+        {% for mentor in mentors %}
+            <div class="module-border-wrap">
+                <div class="listing-card">
+                    <h2 class="text" style="text-align: left;">{{ mentor[4] }}</h2>
+                    <p class="text" style="text-align: left;">{{ mentor[2] }}</p>
+                    <div class="mentorsign" style="right: -220px; top: -35px; position: absolute;">
+                        <div class="button" onclick="location.href='/mentor/mentor_id/{{ mentor[0] }}'">
+                            <span class="button__mask"></span>
+                            <span class="button__text">See more details</span>
+                            <span class="button__text button__text--bis">See more details</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h2 class="text">Sorry, nobody is mentoring in this category right now :(</h2>
+    {% endif %}
+{% endblock %}

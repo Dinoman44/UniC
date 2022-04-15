@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Shop
+{% endblock %}
+
+{% block body %}
+    <h2 class="text">UniC Marketplace</h2>
+
+    <div class="wrappersignin" style="left: 0px; padding-left: 15px; width: fit-content;">
+        <div class="button" onclick="location.href='/'">
+            <span class="button__mask"></span>
+            <span class="button__text">Back home</span>
+            <span class="button__text button__text--bis">Back home</span>
+        </div>
+    </div>
+
+    <div class="wrappersignin"  style="right: 285px; padding-left: 15px; width: fit-content;">
+        <div class="button" onclick="location.href='/uni_shop/sell';">
+            <span class="button__mask"></span>
+            <span class="button__text">Sell stuff</span>
+            <span class="button__text button__text--bis">Sell stuff</span>
+        </div>
+    </div>
+
+    <div class="wrappersignin" style="width: fit-content;">
+        <div class="button" onclick="location.href='/uni_shop/filter'">
+            <span class="button__mask"></span>
+            <span class="button__text">Search using a filter</span>
+            <span class="button__text button__text--bis">Search using a filter</span>
+        </div>
+    </div>
+
+    {% if listings %}
+        {% for listing in listings %}
+            <div class="module-border-wrap">
+                <div class="listing-card">
+                    <h2 class="text" style="text-align: left;">{{ listing[2] }}</h2>
+                    <p class="text" style="text-align: left;">{{ listing[3] }}</p>
+                    <p class="text" style="text-align: left;"><b>Category:</b> {{ listing[4] }}</p>
+                    {% if listing[5] == "new" %}
+                        <p class="text" style="text-align: left;">First hand/new/barely-used</p>
+                    {% else %}
+                        <p class="text" style="text-align: left;">Second-hand</p>
+                    {% endif %}
+                    <p class="text" style="text-align: left;"><i>Put up for sale on <b>{{ listing[7] }}</b> by <b>{{ listing[8] }}</b></i></p>
+                    <div class="mentorsign" style="right: -245px; top: -35px; position: absolute;">
+                        <div class="button" onclick="location.href='/uni_shop/item/{{ listing[0] }}'">
+                            <span class="button__mask"></span>
+                            <span class="button__text">See item</span>
+                            <span class="button__text button__text--bis">See item</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h2 class="text">There are no available listings in this category</h2>
+    {% endif %}
+{% endblock %}

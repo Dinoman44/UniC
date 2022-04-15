@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Mentor | {{ guy[0] }}
+{% endblock %}
+
+{% block body %}
+    <h2></h2>
+    <div class="wrappersignin" style="right: 0px; padding-right: 15px; width: fit-content;">
+        <div class="button" onclick="location.href='/'">
+            <span class="button__mask"></span>
+            <span class="button__text">Back home</span>
+            <span class="button__text button__text--bis">Back home</span>
+        </div>
+    </div>
+
+    <div class="wrappersignin" style="left: 0px; padding-left: 15px; width: fit-content;">
+        <div class="button" onclick="location.href='/mentor/search'">
+            <span class="button__mask"></span>
+            <span class="button__text">Back to mentor search</span>
+            <span class="button__text button__text--bis">Back to mentor search</span>
+        </div>
+    </div>
+
+    <div class="module-border-wrap" style="margin: auto; width: 70%; margin-top: 100px;">
+        <div class="listing-card">
+            <div class="text">
+                <h2>{{ guy[0] }}</h3>
+                <p>{{ mentor[2] }}</p>
+                <p>Area: <b>{{ mentor[3] }}</b></p>
+                <p>Location: {{ guy[4] }}</p>
+                    {% if dist > 250 %} 
+                        <p style="color: #721c24;">Distance from you: {{ display_dist }}</p>
+                    {% elif dist > 100 %} 
+                        <p style="color: #856404;">Distance from you: {{ display_dist }}</p>
+                    {% else %}
+                        <p style="color: #155724;">Distance from you: {{ display_dist }}</p>
+                    {% endif %}
+                <p>Contact number(in case the button below doesn't work): {{ guy[1] }}</p>
+
+                <form hidden method="post" action="chat/redirect">
+                    <input hidden name="csrf_token" value="{{ csrf_token() }}">
+                    <input hidden name="phone_num" value="{{ guy[1] }}">
+                </form>
+
+                <div class="mentorsign" style="margin: auto;" id="submit">
+                    <div class="button">
+                        <span class="button__mask"></span>
+                        <span class="button__text">Contact mentor</span>
+                        <span class="button__text button__text--bis">Contact mentor</span>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelector("#submit").addEventListener("click", () => {
+                if (confirm("You will be redirected to a whatsapp chat with the mentor, where you can begin a chat with them.")) {
+                    document.querySelector("form").submit();
+                }
+            })
+        })
+    </script>
+{% endblock %}

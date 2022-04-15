@@ -1,0 +1,174 @@
+{% extends "layout.html" %} 
+
+{% block title %} 
+    Your account
+{% endblock %}
+
+{% block body %}
+    <h2 class="text">Your account</h2>
+
+    <div class="wrappersignin" style="left: 0px; padding-left: 15px; width: fit-content;">
+        <div class="button" onClick="location.href='/'">
+            <span class="button__mask"></span>
+            <span class="button__text">Back home</span>
+            <span class="button__text button__text--bis">Back home</span>
+        </div>
+        <br>
+    </div>
+
+    <div class="wrappersignin">
+        <div class="button" onclick="location.href='/logout'">
+            <span class="button__mask"></span>
+            <span class="button__text">Log Out</span>
+            <span class="button__text button__text--bis">Log Out</span>
+        </div>
+    </div>
+
+    <div id="account_info" style="padding-left: 35px; padding-right: 35px; padding-top: 20px;">
+        <img src="{{ info[2] }}" alt="pfp" style="width: fit-content;">
+        <p class="text">Username: <b>{{ info[1] }}</b></p>
+        <p class="text">Email: <b>{{ info[0] }}</b></p>
+        <p class="text">Phone number: <b>{{ info[3] }}</b></p>
+        <p class="text">Location: <b>{{ info[4] }}</b></p>
+
+        <div class="submit" style="width: fit-content; position: relative; margin: auto; right: auto;">
+            <div class="button" id="change">
+                <span class="button__mask"></span>
+                <span class="button__text">Change account details</span>
+                <span class="button__text button__text--bis">Change account details</span>
+            </div>
+        </div>
+        <br>
+
+        <div class="submit" style="width: fit-content; position: relative; margin: auto; right: auto;">
+            <div class="button" id="show_listings">
+                <span class="button__mask"></span>
+                <span class="button__text">See your listings</span>
+                <span class="button__text button__text--bis">See your listings</span>
+            </div>
+        </div>
+        <br>
+
+        <div class="submit" style="width: fit-content; position: relative; margin: auto; right: auto;">
+            <div class="button" id="show_mentorships">
+                <span class="button__mask"></span>
+                <span class="button__text">See your mentorships</span>
+                <span class="button__text button__text--bis">See your mentorships</span>
+            </div>
+        </div>
+        <br>
+        
+    </div>
+
+    <div id="mentorships">
+        {% if mentorships %}
+            {% for mentorship in mentorships %}
+                <div class="module-border-wrap">
+                    <div class="listing-card">
+                        <h2 class="text" style="text-align: left;">{{ info[1] }}</h2>
+                        <p class="text" style="text-align: left;">{{ mentorship[2] }}</p>
+                        <div class="mentorsign" style="right: -220px; top: -35px; position: absolute;">
+                            <div class="button" onclick="location.href='/mentor/mentor_id/{{ mentorship[0] }}'">
+                                <span class="button__mask"></span>
+                                <span class="button__text">See more details</span>
+                                <span class="button__text button__text--bis">See more details</span>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="mentorsign" style="right: -213px; bottom: 10px; position: absolute;">
+                            <div class="button" onclick="location.href='/mentor/resign/{{ mentorship[0] }}'">
+                                <span class="button__mask"></span>
+                                <span class="button__text">Resign mentorship</span>
+                                <span class="button__text button__text--bis">Resign mentorship</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h2 class="text">You have not signed up for any mentorships</h2>
+        {% endif %}
+    </div>
+
+    <div id="listings">
+        {% if listings %}
+            {% for listing in listings %}
+                <div class="module-border-wrap">
+                    <div class="listing-card">
+                        <h2 class="text" style="text-align: left;">{{ listing[2] }}</h2>
+                        <p class="text" style="text-align: left;">{{ listing[3] }}</p>
+                        <p class="text" style="text-align: left;"><b>Category:</b> {{ listing[4] }}</p>
+                        {% if listing[5] == "new" %}
+                            <p class="text" style="text-align: left;">First hand/new/barely-used</p>
+                        {% else %}
+                            <p class="text" style="text-align: left;">Second-hand</p>
+                        {% endif %}
+                        <p class="text" style="text-align: left;"><i>Put up for sale on <b>{{ listing[7] }}</b> by <b>you</b></i></p>
+                        <div class="mentorsign" style="right: -245px; top: -35px; position: absolute;">
+                            <div class="button" onclick="location.href='/uni_shop/item/{{ listing[0] }}'">
+                                <span class="button__mask"></span>
+                                <span class="button__text">See item</span>
+                                <span class="button__text button__text--bis">See item</span>
+                            </div>
+                        </div>
+                        <div class="mentorsign" style="right: -245px; bottom: 17px; position: absolute;">
+                            <div class="button" onclick="location.href='/uni_shop/item/mark_sold/{{ listing[0] }}'">
+                                <span class="button__mask"></span>
+                                <span class="button__text">Set as sold</span>
+                                <span class="button__text button__text--bis">Set as sold</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h2 class="text">You have not put up any items for sale</h2>
+        {% endif %}
+    </div>
+
+    <div id="change_info">
+        <form method="post" action="/account">
+            <label for="username" class="text">Change your username if you want to</label><br><br>
+            <div class="input-container" style="width: 80%;">
+                <input value="{{ info[1] }}" name="username" id="username" required>
+            </div>
+            <br><br>
+
+            <label for="location" class="text">Enter your phone number(with country and area codes)</label><br><br>
+            <div class="input-container" style="width: 80%;">
+                <input type="tel" name="phone_num" value="{{ info[3] }}" required>
+            </div>
+            <br><br>
+
+            <label for="location" class="text">Change your location(if needed)</label><br><br>
+            <div class="input-container" style="width: 80%;">
+                <input name="location" id="location" value="{{ info[4] }}" required>
+            </div>
+            <br><br>
+
+            <input name="csrf_token" value="{{ csrf_token() }}" hidden>
+            <input hidden name="long" id="long" required>
+            <input hidden name="lat" id="lat" required>
+            <div class="submit" style="width: fit-content; position: relative; margin: auto; right: auto;">
+                <div class="button" id="submit">
+                    <span class="button__mask"></span>
+                    <span class="button__text">Save changes</span>
+                    <span class="button__text button__text--bis">Save changes</span>
+                </div>
+                <br>
+            </div>
+        </form>
+        <br>
+        <div class="submit" style="position: relative; margin: auto; right: auto;">
+            <div class="button" id="back">
+                <span class="button__mask"></span>
+                <span class="button__text">Go back</span>
+                <span class="button__text button__text--bis">Go back</span>
+            </div>
+            <br>
+        </div>
+    </div>
+
+    <script src="static/js/account_html.js"></script>
+{% endblock %}

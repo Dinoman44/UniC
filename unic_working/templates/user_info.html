@@ -1,0 +1,51 @@
+{% extends "layout.html" %} 
+
+{% block title %} 
+    Enter your details
+{% endblock %}
+
+{% block body %} 
+    <h2 class="text">Almost there...</h2>
+    <p class="text">We just need a few more details</p>
+    <form method="post" action="/user_info">
+        <label for="username" class="text">Change your username if you want to</label><br><br>
+        <div class="input-container">
+            <input value="{{ username }}" name="username" id="username" required>
+        </div>
+        <br><br>
+
+        <label for="email" class="text">This is your chosen email id</label><br><br>
+        <div class="input-container">
+            <input value="{{ email }}" name="email" id="email" required>
+        </div>
+        <br><br>
+
+        <label for="location" class="text">Enter your phone number(with country and area codes)</label><br><br>
+        <div class="input-container">
+            <input type="tel" name="phone_num" placeholder="Ex: +91 9239 23322" required>
+        </div>
+        <br><br>
+
+        <label for="location" class="text">Enter your location</label><br><br>
+        <div class="input-container">
+            <input name="location" id="location" placeholder="(City, State, Country)" required>
+        </div>
+        <br><br>
+
+        <input value="{{ id }}" hidden name="user_id" required>
+        <input value="{{ pic }}" hidden name="pic" required>
+        <input hidden name="long" id="long" required>
+        <input hidden name="lat" id="lat" required>
+        <input hidden name="csrf_token" value="{{ csrf_token() }}">
+        
+        <div class="submit" style="width: 300px; position: relative; margin: auto; right: auto;">
+            <div class="button">
+                <span class="button__mask"></span>
+                <span class="button__text">Submit account details</span>
+                <span class="button__text button__text--bis">Submit account details</span>
+            </div>
+            <br>
+        </div>
+    </form>
+    <script src="static/js/user-info_html.js"></script>
+{% endblock %}

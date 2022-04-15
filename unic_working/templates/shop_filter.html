@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+
+{% block title %} 
+    Sell filter
+{% endblock %} 
+
+{% block body %}
+    <div class='banner'>
+        <img src="/static/img/banner3.png" alt="banner3">
+    </div>
+
+    <h2 class="text">Sort out items using its category and usage(first/second hand)</h2><br>
+
+    <div class="wrappersignin" style="left: 0px; padding-left: 15px; width: fit-content;">
+        <div class="button" onClick="location.href='/uni_shop'">
+            <span class="button__mask"></span>
+            <span class="button__text">Back to shop</span>
+            <span class="button__text button__text--bis">Back to shop</span>
+        </div>
+    </div>
+
+    <form method="post" action='/uni_shop/filter'>
+        <input hidden name="csrf_token" value="{{ csrf_token() }}">
+
+        <div class="center">
+            <div class='radio-group'>
+                {% for category in categories %}
+                    <label class="radio-label">
+                        <input name="category" type="radio" value="{{ category }}">
+                        <span class="inner-label">{{ category }}</span>
+                    </label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <br><br><br>
+
+        <div class="center">
+            <div class='radio-group'>
+                <label class='radio-label'>
+                    <input name='usage' type='radio' id='usage' value="new" checked='checked'>
+                    <span class='inner-label'>First-hand/new/barely used</span>
+                </label>
+                <label class='radio-label'>
+                    <input name='usage' type='radio' id='usage' value="old">
+                    <span class='inner-label'>Second-hand</span>
+                </label>
+            </div>
+        </div>
+
+        <br><br><br> 
+
+        <div class="submit">
+            <div class="button" id="submit">
+                <span class="button__mask"></span>
+                <span class="button__text">Find stuff!</span>
+                <span class="button__text button__text--bis">Find stuff!</span>
+            </div>
+        </div>
+    </form>
+
+        <div class="backtohome">
+            <div class="button" onclick="location.href='/'">
+                <span class="button__mask"></span>
+                <span class="button__text">Back To Home</span>
+                <span class="button__text button__text--bis">Back To Home</span>
+            </div>
+        </div>
+    
+    <br><br><br>    
+
+    <div class="signmentor">
+        <div class="button" onlick="location.href='/mentor/search'">
+            <span class="button__mask"></span>
+            <span class="button__text">Look for a Mentor instead</span>
+            <span class="button__text button__text--bis">Look for a mentor instead</span>
+        </div>
+    </div>
+
+    <br><br><br>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelector("#submit").addEventListener("click", () => {
+                document.querySelector("form").submit();
+            })
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell something
+{% endblock %}
+
+{% block body %}
+    {% if sold %}
+        <script>
+            alert("Success! Your listing has been added")
+            window.location = "/";
+        </script>
+    {% else %} 
+        <h1 class="text" style="padding-top: 10px;">Fill in this form to put something up for sale</h1>
+        <br>
+
+        <form id='sellform' method="post" action="/uni_shop/sell" enctype="multipart/form-data">
+            <label for="prodname" class="text">Enter the name of the item:</label><br><br>
+            <div class="input-container">
+                <input type="text" id="prodname" name="item_name" placeholder="eg: Calculus textbook" required>
+            </div>
+            
+            <br><br><br>
+
+            <label for="proddesc" class="text">A short description(300 characters max):</label><br><br>
+            <div class="input-container">
+                <textarea id="proddesc" name="item_descr" required style="height: 150px">Write the description here</textarea>
+            </div>
+
+            <br><br><br>
+
+            <div class="center">
+                <div class='radio-group'>
+                    {% for category in categories %}
+                        <label class="radio-label">
+                            <input name="category" type="radio" value="{{ category }}">
+                            <span class="inner-label">{{ category }}</span>
+                        </label>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <br><br>
+
+            <div class="center">
+                <div class='radio-group'>
+                    <label class='radio-label'>
+                        <input name='usage' type='radio' id='usage' value="new">
+                        <span class='inner-label'>First-hand/new/barely used</span>
+                    </label>
+                    <label class='radio-label'>
+                        <input name='usage' type='radio' id='usage-2' value="old">
+                        <span class='inner-label'>Second-hand</span>
+                    </label>
+                </div>
+            </div>
+
+            <input name="csrf_token" hidden value="{{ csrf_token() }}">
+
+            <br>
+
+            <div class="submit" style="width: fit-content; margin: auto;" id="submit">
+                <div class="button" value="submit">
+                    <span class="button__mask"></span>
+                    <span class="button__text">Create listing</span>
+                    <span class="button__text button__text--bis">Create listing</span>
+                </div>
+            </div>
+        </form>
+
+        <div class="backtohome">
+            <div class="button" onclick="location.href='/'">
+            <span class="button__mask"></span>
+            <span class="button__text">Back To Home</span>
+            <span class="button__text button__text--bis">Back To Home</span>
+            </div>
+        </div>
+
+        <div class="mentorsign">
+            <div class="button" onclick="location.href='/mentor/signup'">
+            <span class="button__mask"></span>
+            <span class="button__text">Sign up as a mentor isntead?</span>
+            <span class="button__text button__text--bis">Sign up as a mentor isntead?</span>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                document.querySelector("#submit").addEventListener("click", () => {
+                    document.querySelector("form").submit();
+                })
+            })
+        </script>
+    {% endif %}
+{% endblock %}

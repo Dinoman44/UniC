@@ -1,0 +1,122 @@
+{% extends "layout.html" %}    
+
+{% block title %}
+    Mentor search
+{% endblock %}
+
+{% block body %}
+    <div class='banner'>
+        <img src='/static/img/banner4.png' alt="banner4">
+    </div>
+
+    <br><br>
+
+    <form method="post" action="/mentor/search">
+        <input hidden name="csrf_token" value="{{ csrf_token() }}">
+
+        <div class="center">
+            <div class='radio-group'>
+                <label class='radio-label'>
+                    <input name='expertin' type='radio' id='expertinid' value="Computer Science" checked='checked'>
+                    <span class='inner-label'>Computer Science</span>
+                </label>
+                <label class='radio-label'>
+                    <input name='expertin' type='radio' id='expertinid' value="Medecine">
+                    <span class='inner-label'>Medecine</span>
+                </label>
+                <label class='radio-label'>
+                    <input name='expertin' type='radio' id='expertinid' value="Business">
+                    <span class='inner-label'>Business</span>
+                </label>
+                <label class='radio-label'>
+                    <input name='expertin' type='radio' id='expertinid' value="Engineering">
+                    <span class='inner-label'>Engineering</span>
+                </label>
+            </div>
+        </div>
+
+        <br><br><br>
+
+        <div class="center">
+            <div class='radio-group'>
+                <label class='radio-label'>
+                    <input name='expertin' type='radio' id='expertinid' value="Physics">
+                    <span class='inner-label'>Physics</span>
+                </label>
+                <label class='radio-label'>
+                    <input name='expertin' type='radio' id='expertinid' value="Chemistry">
+                    <span class='inner-label'>Chemistry</span>
+                </label>
+                <label class='radio-label'>
+                    <input name='expertin' type='radio' id='expertinid' value="Biology">
+                    <span class='inner-label'>Biology</span>
+                </label>
+                <label class='radio-label'>
+                    <input name='expertin' type='radio' id='expertinid' value="Economics">
+                    <span class='inner-label'>Economics</span>
+                </label>
+            </div>
+        </div>
+
+        <br><br><br>
+
+        <div class="center">
+            <div class='radio-group'>
+                <label class='radio-label'>
+                    <input name='expertin' type='radio' id='expertinid' value="General academic advice">
+                    <span class='inner-label'>Academic advice</span>
+                </label>
+                <label class='radio-label'>
+                    <input name='expertin' type='radio' id='expertinid' value="Career-related advice">
+                    <span class='inner-label'>Career-related advice</span>
+                </label>
+                <label class='radio-label'>
+                    <input name='expertin' type='radio' id='expertinid' value="General advice">
+                    <span class='inner-label'>General advice</span>
+                </label>
+            </div>
+        </div>
+
+        <br><br><br>
+
+        <div class="submit">
+            <div class="button" id="submit">
+                <span class="button__mask"></span>
+                <span class="button__text">Find a Mentor!</span>
+                <span class="button__text button__text--bis">Find a Mentor!</span>
+            </div>
+        </div>
+    </form>
+
+
+
+    <div class="backtohome">
+        <div class="button" id="backtohome">
+            <span class="button__mask"></span>
+            <span class="button__text">Back To Home</span>
+            <span class="button__text button__text--bis">Back To Home</span>
+        </div>
+    </div>
+
+    <div class="backtohome" style="right: 215px; width: fit-content;">
+        <div class="button" id="signupmentor">
+            <span class="button__mask"></span>
+            <span class="button__text">Sign up as a mentor</span>
+            <span class="button__text button__text--bis">Sign up as a mentor</span>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelector("#backtohome").addEventListener("click", () => {
+                location.href = "/";
+            })
+            document.querySelector("#signupmentor").addEventListener("click", () => {
+                location.href = "/mentor/signup";
+            })
+            document.querySelector("#submit").addEventListener("click", () => {
+                document.querySelector("form").submit();
+            })
+        })
+    </script>
+{% endblock %}
